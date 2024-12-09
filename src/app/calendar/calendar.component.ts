@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, input, InputSignal, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DateTime, Info, Interval } from 'luxon';
+import { DateTime, DateTimeFormatOptions, Info, Interval } from 'luxon';
+import { IMeeting } from '../_share/i-meeting';
 
 @Component({
   selector: 'app-calendar',
@@ -14,6 +15,12 @@ import { DateTime, Info, Interval } from 'luxon';
  * 1º Criação de algumas referencias de variaveis, todas usando Signal()
  */
 export class CalendarComponent {
+  /**Signal de Meeting via Imput() , vindo AppComponent*/
+  meeting: InputSignal<IMeeting> = input.required();
+
+  /**Temos q ter uma variavel para o dia clicado */
+  activeDate: WritableSignal<DateTime | null> = signal(null);
+
   /** hoje */
   today: Signal<DateTime> = signal(DateTime.local());
 
@@ -44,10 +51,12 @@ export class CalendarComponent {
       /* IF ou forçar a Typagem return d.start as DateTime; */
     });
   });
-     constructor() {
-      console.log('DayOfMOnth: ',  this.dayOfMonth());
-      console.log('DayOfMOnth: weekDay ',  this.dayOfMonth().map(d => d.weekday));
-     }
+  /** */
+  DATE_MED = DateTime.DATE_MED;
+  constructor() {
+    console.log('DayOfMOnth: ', this.dayOfMonth());
+    console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));
+  }
 
 
 

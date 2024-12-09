@@ -27,11 +27,32 @@
         </div>
         <div class="calendar-grid">
             @for (itemDays of this.dayOfMonth(); track $index) {
-            <div [ngClass]="{'calendar-grid-cell' : true}">
+            <div [ngClass]="{'calendar-grid-cell' : true}" (click)="this.activeDate.set(itemDays)">
                 {{ itemDays.day}}
             </div>
             }
         </div>
+    </div>
+    <div class="schedule">
+        <div class="schedule-headline">
+            <!-- para remover o Question Market podemos criar um propriedade local, coom isto não precisamos de por this.activeDate()? -->
+            <!-- @if (this.activeDate()) {
+                <div>
+                    {{ this.activeDate()?.toLocaleString(DATE_MED)}}
+                </div>
+            } -->
+            @if (this.activeDate(); as activeDate) {
+            <div>
+                <!-- toLocaleString() renderiza o dado em forma de STREAM data para que seja capturada 
+                 assim que clicar no calendario no evento (click)="this.activeDate.set(itemDays)"  -->
+                {{ activeDate.toLocaleString(this.DATE_MED)}}
+            </div>
+            } @else {
+               <div> Please Select your Day</div>
+            }
+
+        </div>
+        
     </div>
 </div>
 
