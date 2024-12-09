@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, computed, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DateTime, Info, Interval } from 'luxon';
@@ -5,7 +6,7 @@ import { DateTime, Info, Interval } from 'luxon';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [RouterOutlet,],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })

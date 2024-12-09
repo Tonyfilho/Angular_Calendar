@@ -1,3 +1,39 @@
-<p>calendar works!</p>
+<div class="calendar-container">
+    <div class="calendar">
+        <div class="calendar-headline">
+            <div class="calendar-headline-month">
+                {{ this.firstDayOfActiveMonth().monthShort }}
+                {{ this.firstDayOfActiveMonth().year}}
+
+            </div>
+            <div class="calendar-headline-controls">
+                <div class="calendar-headline-control">
+                    <<< /div>
+                        <div class="calendar-headline-control-today">Todays</div>
+                        <div class="calendar-headline-control">>></div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-weeks-grid">
+            @for (itemWeekDays of weekDays(); track $index) {
+            <div class="calendar-weeks-grid-cell">
+                {{ itemWeekDays }}
+            </div>
+            }
+        </div>
+        <div class="calendar-grid">
+            @for (itemDays of this.dayOfMonth(); track $index) {
+            <div [ngClass]="{'calendar-grid-cell' : true}">
+                {{ itemDays.day}}
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
 
 <router-outlet />
