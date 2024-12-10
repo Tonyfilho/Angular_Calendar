@@ -69,6 +69,12 @@ export class CalendarComponent {
     return this.meetings()[activeDateISO]??[];
 
   });
+
+ /**Criando o metodo de Previos Mes */
+ goToPreviusMonth(): void {
+  this.firstDayOfActiveMonth().set(this.firstDayOfActiveMonth().minus(1).month())
+ }
+
   constructor() {
     console.log('DayOfMOnth: ', this.dayOfMonth());
     console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));

@@ -74,6 +74,10 @@
   .calendar-grid-cell-active {
     background: #9ba3bf;
   }
+
+  .calendar-grid-cell-active-meeting {
+    background: #ebe723;
+  }
   
   .schedule {
     margin-left: 10px;
