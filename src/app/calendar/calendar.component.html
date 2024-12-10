@@ -34,6 +34,7 @@
         </div>
     </div>
     <div class="schedule">
+        <!-- mostrando se existem dias selecionados -->
         <div class="schedule-headline">
             <!-- para remover o Question Market podemos criar um propriedade local, coom isto não precisamos de por this.activeDate()? -->
             <!-- @if (this.activeDate()) {
@@ -52,8 +53,19 @@
             }
 
         </div>
-        
+        <!-- mostrando se existem meeting planejadas -->
+     <div>
+        @if (this.activeDate() && this.activeDayMeetings().length === 0 ) {
+            <div> No Planned Meeting Today  </div>
+        }
+        @if (this.activeDate() && this.activeDayMeetings().length > 0 ) {
+              @for (itemMeeting of this.activeDayMeetings(); track $index) {
+                <div>{{ itemMeeting }}</div>
+              }
+        }
+     </div>    
     </div>
+
 </div>
 
 

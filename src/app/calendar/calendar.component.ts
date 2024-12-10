@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, InputSignal, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DateTime, DateTimeFormatOptions, Info, Interval } from 'luxon';
+import { DateTime, Info, Interval } from 'luxon';
 import { IMeeting } from '../_share/i-meeting';
 
 @Component({
@@ -16,7 +16,7 @@ import { IMeeting } from '../_share/i-meeting';
  */
 export class CalendarComponent {
   /**Signal de Meeting via Imput() , vindo AppComponent*/
-  meeting: InputSignal<IMeeting> = input.required();
+  meetings: InputSignal<IMeeting> = input.required();
 
   /**Temos q ter uma variavel para o dia clicado */
   activeDate: WritableSignal<DateTime | null> = signal(null);
@@ -51,8 +51,24 @@ export class CalendarComponent {
       /* IF ou forçar a Typagem return d.start as DateTime; */
     });
   });
-  /** */
+  /** É a formatação do tipo de dados q será colocando no html */
   DATE_MED = DateTime.DATE_MED;
+
+  /**criaremos uma var para represente o dia de reunião, q ja temos agendado */
+  activeDayMeetings: Signal<string[]> = computed(() => {
+    const activeDateDay = this.activeDate();
+    if (activeDateDay === null) {
+      return [];
+    }
+
+    const activeDateISO = activeDateDay.toISODate();
+    if (!activeDateISO ) {
+      return [];
+    }
+    console.log('AcriveDayMeetings', this.meetings()[activeDateISO]);
+    return this.meetings()[activeDateISO]??[];
+
+  });
   constructor() {
     console.log('DayOfMOnth: ', this.dayOfMonth());
     console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));
