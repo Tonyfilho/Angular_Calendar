@@ -21,6 +21,7 @@ export class CalendarComponent {
   /**Temos q ter uma variavel para o dia clicado */
   activeDate: WritableSignal<DateTime | null> = signal(null);
 
+  todayNumber: number = DateTime.now().day;
   /** hoje */
   today: Signal<DateTime> = signal(DateTime.local());
 
@@ -47,7 +48,7 @@ export class CalendarComponent {
       if (d.start === null) {
         throw new Error('Wrong Date');
       }
-      return d.start as DateTime;
+      return d.start;
       /* IF ou forçar a Typagem return d.start as DateTime; */
     });
   });
@@ -65,7 +66,12 @@ export class CalendarComponent {
     if (!activeDateISO ) {
       return [];
     }
-    console.log('AcriveDayMeetings', this.meetings()[activeDateISO]);
+    console.log('ActiveIso', activeDateISO);
+    console.log('ActiveDayMeetings', this.meetings()[activeDateISO]);
+   // console.log(this?.meetings()[activeDateISO]?.length > 0);
+   // this.meetings()[activeDateISO].find(d => console.log( d !== undefined));
+
+    
     return this.meetings()[activeDateISO]??[];
 
   });
@@ -75,12 +81,13 @@ export class CalendarComponent {
   // const minusMonth = this.firstDayOfActiveMonth().minus({month: 1}) as DateObjectUnits;
   const minusMonth = this.firstDayOfActiveMonth().minus({month: 1});
   console.log('?mes anterior: ',  this.firstDayOfActiveMonth());
-   this.firstDayOfActiveMonth().set(this.today().startOf('month').minus({month: 1}));
+   this.firstDayOfActiveMonth().set(this.today().startOf('month').minus({month: 1}) as DateObjectUnits);
  }
 
   constructor() {
-    console.log('DayOfMOnth: ', this.dayOfMonth());
-    console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));
+   // console.log('DayOfMOnth: ', this.dayOfMonth());
+   // console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));
+   
   }
 
 

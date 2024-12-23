@@ -26,10 +26,14 @@
             <div [ngClass]="{'calendar-grid-cell' : true, 
             'calendar-grid-cell-active': this.activeDate()?.toISODate() === itemDays?.toISODate()
             , 'calendar-grid-cell-inactive': itemDays.month !== this.firstDayOfActiveMonth().month,
-            'calendar-grid-cell-active-meeting' : this.activeDayMeetings()[$index] === itemDays.toISODate()}"
+            'calendar-grid-cell-active-day-now' : this.todayNumber === itemDays.day,
+           ' calendar-grid-cell-active-meeting' : this.meetings()[itemDays.toFormat('yyyy-MM-dd')]            
+            }"
                 (click)="this.activeDate.set(itemDays)">
                 {{ itemDays.day}}
+               
             </div>
+          
             }
         </div>
     </div>
