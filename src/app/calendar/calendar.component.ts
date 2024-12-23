@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, InputSignal, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DateTime, Info, Interval } from 'luxon';
+import { DateObjectUnits, DateTime, Info, Interval } from 'luxon';
 import { IMeeting } from '../_share/i-meeting';
 
 @Component({
@@ -72,7 +72,10 @@ export class CalendarComponent {
 
  /**Criando o metodo de Previos Mes */
  goToPreviusMonth(): void {
-  this.firstDayOfActiveMonth().set(this.firstDayOfActiveMonth().minus(1).month())
+  // const minusMonth = this.firstDayOfActiveMonth().minus({month: 1}) as DateObjectUnits;
+  const minusMonth = this.firstDayOfActiveMonth().minus({month: 1});
+  console.log('?mes anterior: ',  this.firstDayOfActiveMonth());
+   this.firstDayOfActiveMonth().set(this.today().startOf('month').minus({month: 1}));
  }
 
   constructor() {
