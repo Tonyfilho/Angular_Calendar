@@ -8,8 +8,8 @@
             </div>
             <div class="calendar-headline-controls">
                          <div class="calendar-headline-control" (click)="goToPreviusMonth()">{{'<<' }} </div>
-                        <div class="calendar-headline-control-today">Todays</div>
-                        <div class="calendar-headline-control">>></div>
+                        <div class="calendar-headline-control-today" (click)="goToActualyMonth()">Todays</div>
+                        <div class="calendar-headline-control" (click)="goToNextMonth()">>></div>
                 
             </div>
         </div>
@@ -21,7 +21,7 @@
             </div>
             }
         </div>
-        <div class="calendar-grid">
+        <div class="calendar-grid" >
             @for (itemDays of this.dayOfMonth(); track $index) {
             <div [ngClass]="{'calendar-grid-cell' : true, 
             'calendar-grid-cell-active': this.activeDate()?.toISODate() === itemDays?.toISODate()

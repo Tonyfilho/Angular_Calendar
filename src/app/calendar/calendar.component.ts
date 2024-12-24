@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input, InputSignal, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed,  input, InputSignal, signal, Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DateObjectUnits, DateTime, Info, Interval } from 'luxon';
+import {  DateTime, Info, Interval } from 'luxon';
 import { IMeeting } from '../_share/i-meeting';
 
 @Component({
@@ -65,28 +65,43 @@ export class CalendarComponent {
     const activeDateISO = activeDateDay.toISODate();
     if (!activeDateISO ) {
       return [];
-    }
-    console.log('ActiveIso', activeDateISO);
-    console.log('ActiveDayMeetings', this.meetings()[activeDateISO]);
-   // console.log(this?.meetings()[activeDateISO]?.length > 0);
-   // this.meetings()[activeDateISO].find(d => console.log( d !== undefined));
-
-    
+    }    
     return this.meetings()[activeDateISO]??[];
 
   });
 
  /**Criando o metodo de Previos Mes */
  goToPreviusMonth(): void {
-  // const minusMonth = this.firstDayOfActiveMonth().minus({month: 1}) as DateObjectUnits;
-  const minusMonth = this.firstDayOfActiveMonth().minus({month: 1});
-  console.log('?mes anterior: ',  this.firstDayOfActiveMonth());
-   this.firstDayOfActiveMonth().set(this.today().startOf('month').minus({month: 1}) as DateObjectUnits);
+   /**o toObject(), transforma de DateTime para DateObjectUnits */  
+  const newDateObject = { ...this.firstDayOfActiveMonth().minus({ month: 1 }).toObject() };
+  this.firstDayOfActiveMonth.set(newDateObject as any);
+   
+  //  const minusMonth = this.firstDayOfActiveMonth().minus({month: 1}).toObject();
+    //console.log("Before Updated:", this.firstDayOfActiveMonth(), 'minus ', minusMonth);
+   // this.firstDayOfActiveMonth().update(() => {    });  
+   // console.log("After Updated:", this.firstDayOfActiveMonth());
+  
+  
+ }
+ goToNextMonth(): void {
+ 
+  const plusMonth = this.firstDayOfActiveMonth().plus({month: 1});
+  /**o toObject(), transforma de DateTime para DateObjectUnits */  
+  this.firstDayOfActiveMonth().set(plusMonth.toObject());  
+ }
+ goToActualyMonth(): void {
+ 
+  const todayMonth = this.today().startOf('month');
+  /**o toObject(), transforma de DateTime para DateObjectUnits */  
+  this.firstDayOfActiveMonth().set(todayMonth.toObject());  
  }
 
-  constructor() {
-   // console.log('DayOfMOnth: ', this.dayOfMonth());
-   // console.log('DayOfMOnth: weekDay ', this.dayOfMonth().map(d => d.weekday));
+  constructor() {   
+    // effect(() => {    
+    //   this.goToPreviusMonth();
+    // });
+   
+
    
   }
 
