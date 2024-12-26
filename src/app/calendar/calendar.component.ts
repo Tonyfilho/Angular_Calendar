@@ -71,35 +71,22 @@ export class CalendarComponent {
 
  /**Criando o metodo de Previos Mes */
  goToPreviusMonth(): void {
-   /**o toObject(), transforma de DateTime para DateObjectUnits */  
-  const newDateObject = { ...this.firstDayOfActiveMonth().minus({ month: 1 }).toObject() };
-  this.firstDayOfActiveMonth.set(newDateObject as any);
-   
-  //  const minusMonth = this.firstDayOfActiveMonth().minus({month: 1}).toObject();
-    //console.log("Before Updated:", this.firstDayOfActiveMonth(), 'minus ', minusMonth);
-   // this.firstDayOfActiveMonth().update(() => {    });  
-   // console.log("After Updated:", this.firstDayOfActiveMonth());
-  
+   /**o toObject(), transforma de DateTime para DateObjectUnits, mas sem invocar o WritableSignal não precisa usar */  
+  const minusMonth = this.firstDayOfActiveMonth().minus({ month: 1 });
+  this.firstDayOfActiveMonth.set(minusMonth);
   
  }
- goToNextMonth(): void {
- 
-  const plusMonth = this.firstDayOfActiveMonth().plus({month: 1});
-  /**o toObject(), transforma de DateTime para DateObjectUnits */  
-  this.firstDayOfActiveMonth().set(plusMonth.toObject());  
+ goToNextMonth(): void { 
+  const plusMonth = this.firstDayOfActiveMonth().plus({month: 1});  
+  this.firstDayOfActiveMonth.set(plusMonth);  
  }
- goToActualyMonth(): void {
- 
-  const todayMonth = this.today().startOf('month');
-  /**o toObject(), transforma de DateTime para DateObjectUnits */  
-  this.firstDayOfActiveMonth().set(todayMonth.toObject());  
+ goToActualyMonth(): void { 
+  const todayMonth = this.today().startOf('month');  
+  this.firstDayOfActiveMonth.set(todayMonth);  
  }
 
   constructor() {   
-    // effect(() => {    
-    //   this.goToPreviusMonth();
-    // });
-   
+  
 
    
   }
