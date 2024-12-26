@@ -20,7 +20,7 @@ export class CalendarComponent {
   /**Temos q ter uma variavel para o dia clicado */
   activeDate: WritableSignal<DateTime | null> = signal(null);
 
-  todayNumber = DateTime.now().toFormat('yyyy-MM-dd');
+  todayYearMonthDay = DateTime.now().toFormat('yyyy-MM-dd');
   /** hoje */
   today: Signal<DateTime> = signal(DateTime.local());
 
