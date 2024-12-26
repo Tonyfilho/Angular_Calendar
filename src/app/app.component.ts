@@ -3,11 +3,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import * as luxon from 'luxon'; //and attach the luxon variable to Window object using window.luxon = luxon
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CalendarComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    imports: [CalendarComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   /**Isto é um Dummer de dados vindo do server */

@@ -5,11 +5,10 @@ import {  DateTime, Info, Interval } from 'luxon';
 import { IMeeting } from '../_share/i-meeting';
 
 @Component({
-  selector: 'app-calendar',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule],
-  templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+    selector: 'app-calendar',
+    imports: [RouterOutlet, CommonModule],
+    templateUrl: './calendar.component.html',
+    styleUrl: './calendar.component.css'
 })
 /**
  * 1º Criação de algumas referencias de variaveis, todas usando Signal()
