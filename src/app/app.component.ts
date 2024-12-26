@@ -21,7 +21,7 @@ export class AppComponent {
     console.group(
       luxon.DateTime.now().toFormat('yyyy-MM-dd'),
       luxon.DateTime.local(),
-      luxon.DateTime.local().day,
+      luxon.DateTime.local().day.toPrecision(),
       
       luxon.DateTime.local(),
       luxon.DateTime.local().startOf('month').toString(),
